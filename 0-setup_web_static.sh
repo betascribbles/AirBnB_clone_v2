@@ -11,7 +11,7 @@ echo
 
 #--configure firewall
 sudo ufw allow 'Nginx HTTP'
-echo -e "\e[1;32m NGINX firewall configured\e[0m"
+echo -e "\e[1;32m Allow incomming NGINX HTTP connections\e[0m"
 echo
 
 #--created the dir
@@ -37,25 +37,7 @@ echo
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -hR ubuntu:ubuntu /data
 
-printf %s "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
-    root   /var/www/html;
-    index  index.html index.htm;
-    location /web_static {
-        alias /data/web_static/current;
-        index index.html index.htm;
-    }
-    location /redirect_me {
-        return 301 http://youtube.com/;
-    }
-    error_page 404 /404.html;
-    location /404 {
-      root /var/www/html;
-      internal;
-    }
-}" > /etc/nginx/sites-available/default
+sudo sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
 
 sudo ln -sf '/etc/nginx/sites-available/default' '/etc/nginx/sites-enabled/default'
 echo -e "\e[1;32m Symbolic link created\e[0m"
