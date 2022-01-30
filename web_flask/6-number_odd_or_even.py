@@ -7,6 +7,7 @@ Routes:
     /python/<text> - display "Python is cool"
     /number/<n> - display n if integer
     /number_template/<n> - display a HTML page if n is int
+    /number_odd_or_even/<n> - displays if a number is odd or even
 """
 from flask import Flask, render_template
 
