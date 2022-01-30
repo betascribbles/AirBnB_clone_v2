@@ -26,7 +26,7 @@ def hbnb():
 def c_text(text):
     """prints C followed by <text> content"""
     text = text.replace("_", " ")
-    return "C %s" %text
+    return "C %s" % text
 
 
 if __name__ == "__main__":
